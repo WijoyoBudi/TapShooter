@@ -7,14 +7,15 @@ public class Projectile : MonoBehaviour
     private Vector2 Target;
     public float speed;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         Target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         transform.position = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, Target) < 0.2f ){
+            Destroy(gameObject);
+        }
     }
 }
